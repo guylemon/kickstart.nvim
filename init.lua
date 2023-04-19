@@ -112,6 +112,9 @@ require('lazy').setup({
     },
   },
 
+  -- Harpoon
+  'theprimeagen/harpoon',
+
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
@@ -339,10 +342,10 @@ require('nvim-treesitter.configs').setup {
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
+        ['<leader>1'] = '@parameter.inner',
       },
       swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
+        ['<leader>2'] = '@parameter.inner',
       },
     },
   },
@@ -487,6 +490,16 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>j", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<leader>k", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<leader>l", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<leader>;", function() ui.nav_file(4) end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
